@@ -39,11 +39,14 @@ if [ "$start_mongodb" = true ]; then
 fi
 
 # Start backend container if specified
+# environment variavles will override the ones in the Dockerfile
 if [ "$start_backend" = true ]; then
     docker run --name backend-container --rm -d -p 80:80 --network goals-net \
     -v logs:/app/logs \
     -v $(pwd)/backend:/app \
     -v /app/node_modules \
+    -e MONGODB_USERNAME=adminuser \
+    -e MONGODB_PASSWORD=secret \
     goals-backend
 fi
 

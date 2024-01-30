@@ -10,4 +10,8 @@ COPY . /app
 
 EXPOSE 80
 
+# will get overriden by environment variable on command line
+ENV MONGODB_USERNAME=default
+ENV MONGODB_PASSWORD=secret
+
 CMD ["npm", "start"]
