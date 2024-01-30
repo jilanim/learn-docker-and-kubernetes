@@ -39,7 +39,7 @@ if [ "$start_mongodb" = true ]; then
 fi
 
 # Start backend container if specified
-# environment variavles will override the ones in the Dockerfile
+# environment variables will override the ones in the Dockerfile
 if [ "$start_backend" = true ]; then
     docker run --name backend-container --rm -d -p 80:80 --network goals-net \
     -v logs:/app/logs \
@@ -51,6 +51,9 @@ if [ "$start_backend" = true ]; then
 fi
 
 # Start frontend container if specified
+# use the volume flag to bind mount the local source code into the container
 if [ "$start_frontend" = true ]; then
-    docker run --name front-container --rm -p 3000:3000 -it goals-frontend
+    docker run --name front-container --rm -p 3000:3000 \
+    -v $(pwd)/frontend/src:/app/src \
+    -it goals-frontend
 fi
