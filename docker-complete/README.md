@@ -11,4 +11,4 @@ docker-compose run --rm composer-service create-project --prefer-dist laravel/la
 
 # Run only specific services with docker-compose up
 
-docker-compose up server-service php-service mysql-service
+docker-compose up -d server-service php-service mysql-service
