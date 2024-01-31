@@ -1,12 +1,17 @@
 version: "3.8"
 services:
-  server:
+  server-service:
     image: "nginx:stable-alpine"
     ports:
       - "8000:80"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-  # php:
+  php-service:
+    build:
+      context: ./dockerfiles
+      dockerfile: php.dockerfile
+    volumes:
+      - ./src:/var/www/html:delegated # delegated improves performance and syncs files with host machine with a delay
   # mysql:
   # composer:
   # artisan:
