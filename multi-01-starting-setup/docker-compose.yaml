@@ -8,9 +8,9 @@ services:
     #   MONGO_INITDB_ROOT_USERNAME: adminuser
     #   MONGO_INITDB_ROOT_PASSWORD: secret
     env_file:
-      - ./env/mongo.env
+      - ../env/mongo.env
   backend:
-    build: ./multi-01-starting-setup/backend
+    build: ./backend
     # build:
     #   context: ./backend
     #   dockerfile: Dockerfile
@@ -20,14 +20,22 @@ services:
       - "80:80"
     volumes:
       - logs:/app/logs
-      - ./multi-01-starting-setup/backend:/app
+      - ./backend:/app
       - /app/node_modules
     env_file:
-      - ./env/backend.env
+      - ../env/backend.env
     depends_on:
       - mongodb
-
-  # frontend:
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend/src:/app/src
+    stdin_open: true
+    tty: true
+    depends_on:
+      - backend
 
 volumes:
   mongodata:
