@@ -13,6 +13,7 @@ services:
       dockerfile: php.dockerfile
     volumes:
       - ./src:/var/www/html:delegated # delegated improves performance and syncs files with host machine with a delay
+    user: "${UID}:${GID}"
   mysql-service:
     image: "mysql:5.7"
     env_file:
