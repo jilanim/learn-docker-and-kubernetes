@@ -16,12 +16,12 @@ services:
     image: "mysql:5.7"
     env_file:
       - ./env/mysql.env
-  composer: # utility container'
+  composer-service: # utility container'
     build:
       context: ./dockerfiles
       dockerfile: composer.dockerfile
     volumes:
       - ./src:/var/www/html
-
+    user: "${UID}:${GID}"
   # artisan:
   # npm:
