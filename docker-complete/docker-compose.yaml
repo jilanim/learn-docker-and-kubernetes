@@ -1,7 +1,9 @@
 version: "3.8"
 services:
   server-service:
-    image: "nginx:stable-alpine"
+    build:
+      context: .
+      dockerfile: dockerfiles/nginx.dockerfile
     ports:
       - "8000:80"
     volumes:
@@ -12,8 +14,8 @@ services:
       - mysql-service
   php-service:
     build:
-      context: ./dockerfiles
-      dockerfile: php.dockerfile
+      context: .
+      dockerfile: dockerfiles/php.dockerfile
     volumes:
       - ./src:/var/www/html:delegated # delegated improves performance and syncs files with host machine with a delay
     user: "${UID}:${GID}"
@@ -30,8 +32,8 @@ services:
     user: "${UID}:${GID}"
   artisan-service: #laravel command that runs in the php container
     build:
-      context: ./dockerfiles
-      dockerfile: php.dockerfile
+      context: .
+      dockerfile: dockerfiles/php.dockerfile
     volumes:
       - ./src:/var/www/html
     entrypoint: ["php", "/var/www/html/artisan"] #php file that runs utility commands as part of the laravel framework
