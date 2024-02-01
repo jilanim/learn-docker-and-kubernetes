@@ -51,6 +51,10 @@ docker push jilanim/node-example-1
 ## Run image on EC2
 
 ```
+# get latest image (always do this first before running image in case of changes in image)
+docker pull jilanim/node-example-1
+
+# run image
 docker run -d --rm -p 80:80 jilanim/node-example-1
 ```
 
@@ -59,6 +63,6 @@ docker run -d --rm -p 80:80 jilanim/node-example-1
 By default, only SSH traffic is allowed into the container.
 
 ```
-# Security Groups > launch-wizard-1 > Inbound Rules
-
+# Security Groups > launch-wizard-1 > Inbound Rules > Edit inbound rule
+# Add a HTTP rule with port 80 for Anywhere (0.0.0.0/0)
 ```
