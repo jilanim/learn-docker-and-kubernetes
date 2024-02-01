@@ -28,5 +28,16 @@ services:
     volumes:
       - ./src:/var/www/html
     user: "${UID}:${GID}"
-  # artisan:
-  # npm:
+  artisan-service: #laravel command that runs in the php container
+    build:
+      context: ./dockerfiles
+      dockerfile: php.dockerfile
+    volumes:
+      - ./src:/var/www/html
+    entrypoint: ["php", "/var/www/html/artisan"] #php file that runs utility commands as part of the laravel framework
+  npm-service:
+    image: "node:14"
+    working_dir: /var/www/html
+    entrypoint: ["npm"]
+    volumes:
+      - ./src:/var/www/html

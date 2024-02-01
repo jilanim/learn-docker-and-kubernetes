@@ -23,3 +23,10 @@ docker-compose up -d server-service
 ```
 docker-compose up -d --build server-service
 ```
+
+# run artisan (for data migration task)
+
+```
+# will some data to the database and check if the database setup works
+docker-compose run --rm artisan-service migrate
+```
