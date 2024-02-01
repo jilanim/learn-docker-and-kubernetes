@@ -1,32 +1,14 @@
-# Export UID and GID
+# Build image
 
-`export UID && export GID`
+`docker build -t node-dep-example .`
 
-# Generate Laravel project in src/
+# Run container
 
-```
-rm -rf src/ && mkdir src
-docker-compose run --rm composer-service create-project --prefer-dist laravel/laravel .
-```
+`docker run --rm -d --name node-dep -p 80:80 node-dep-example`
 
-# Run only specific services with docker-compose up
+# AWS
 
 ```
-docker-compose up -d server-service php-service mysql-service
-
-# loads other services via dependency declarations
-docker-compose up -d server-service
-```
-
-# enforce rebuild with docker-compose up to ensure any changes are picked up in dockerfiles
-
-```
-docker-compose up -d --build server-service
-```
-
-# run artisan (for data migration task)
-
-```
-# will some data to the database and check if the database setup works
-docker-compose run --rm artisan-service migrate
+chmod 400 "dockercomplete1.pem"
+ssh -i "dockercomplete1.pem" ec2-user@ec2-15-222-250-234.ca-central-1.compute.amazonaws.com
 ```
