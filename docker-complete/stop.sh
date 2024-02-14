@@ -1,2 +1,5 @@
-docker stop node-dep
-docker container prune && docker image prune -a && docker volume prune
+# clean up resources 
+kubectl delete service first-app
+kubectl delete deployment first-app
+
+minikube stop
