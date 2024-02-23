@@ -19,5 +19,11 @@ spec: #deployment spec
       containers:
         - name: second-node
           image: jilanim/kub-first-app:latest
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            periodSeconds: 3 # how often to check
+            initialDelaySeconds: 3 # how long to wait before first check
         # - name: ...
         #   image: ...
