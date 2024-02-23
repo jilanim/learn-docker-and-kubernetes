@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: second-app-deployment
+  labels:
+    group: example
 spec: #deployment spec
   replicas: 1
   selector: # required otherwise it will not know which pods to manage
