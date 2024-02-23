@@ -18,7 +18,8 @@ spec: #deployment spec
     spec: #pod spec
       containers:
         - name: second-node
-          image: jilanim/kub-first-app:latest
+          image: jilanim/kub-first-app:2
+          imagePullPolicy: Always #forces pulling latest image on the tag
           livenessProbe:
             httpGet:
               path: /
